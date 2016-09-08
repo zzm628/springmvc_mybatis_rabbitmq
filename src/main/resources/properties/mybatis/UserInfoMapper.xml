@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="zhang.zhe.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="zhang.zhe.model.UserInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="CHAR" />
+    <result column="register_date" property="registerDate" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="gender" property="gender" jdbcType="VARCHAR" />
+    <result column="head_img" property="headImg" jdbcType="VARCHAR" />
+    <result column="hospital_city" property="hospitalCity" jdbcType="VARCHAR" />
+    <result column="access_profile" property="accessProfile" jdbcType="INTEGER" />
+    <result column="access_monitor" property="accessMonitor" jdbcType="INTEGER" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="fixed_tel" property="fixedTel" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="msn" property="msn" jdbcType="VARCHAR" />
+    <result column="mail_address" property="mailAddress" jdbcType="VARCHAR" />
+    <result column="mail_code" property="mailCode" jdbcType="VARCHAR" />
+    <result column="blood_type" property="bloodType" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="CHAR" />
+    <result column="district" property="district" jdbcType="CHAR" />
+    <result column="emailCode" property="emailcode" jdbcType="CHAR" />
+    <result column="chooseType" property="choosetype" jdbcType="INTEGER" />
+    <result column="subscribe_email" property="subscribeEmail" jdbcType="INTEGER" />
+    <result column="abi_invite" property="abiInvite" jdbcType="INTEGER" />
+    <result column="abi_study" property="abiStudy" jdbcType="INTEGER" />
+    <result column="invite_count" property="inviteCount" jdbcType="INTEGER" />
+    <result column="dwell_address" property="dwellAddress" jdbcType="VARCHAR" />
+    <result column="identity" property="identity" jdbcType="VARCHAR" />
+    <result column="is_first_login" property="isFirstLogin" jdbcType="BIT" />
+    <result column="person_id" property="personId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, type, nickname, realname, password, register_date, status, birthday, gender, 
+    head_img, hospital_city, access_profile, access_monitor, email, fixed_tel, phone, 
+    qq, msn, mail_address, mail_code, blood_type, city, district, emailCode, chooseType, 
+    subscribe_email, abi_invite, abi_study, invite_count, dwell_address, identity, is_first_login, 
+    person_id
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="zhang.zhe.model.UserInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="zhang.zhe.model.UserInfoExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="zhang.zhe.model.UserInfo" >
+    insert into user (id, type, nickname, 
+      realname, password, register_date, 
+      status, birthday, gender, 
+      head_img, hospital_city, access_profile, 
+      access_monitor, email, fixed_tel, 
+      phone, qq, msn, mail_address, 
+      mail_code, blood_type, city, 
+      district, emailCode, chooseType, 
+      subscribe_email, abi_invite, abi_study, 
+      invite_count, dwell_address, identity, 
+      is_first_login, person_id)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=TINYINT}, #{nickname,jdbcType=VARCHAR}, 
+      #{realname,jdbcType=VARCHAR}, #{password,jdbcType=CHAR}, #{registerDate,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=TINYINT}, #{birthday,jdbcType=DATE}, #{gender,jdbcType=VARCHAR}, 
+      #{headImg,jdbcType=VARCHAR}, #{hospitalCity,jdbcType=VARCHAR}, #{accessProfile,jdbcType=INTEGER}, 
+      #{accessMonitor,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{fixedTel,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, #{msn,jdbcType=VARCHAR}, #{mailAddress,jdbcType=VARCHAR}, 
+      #{mailCode,jdbcType=VARCHAR}, #{bloodType,jdbcType=VARCHAR}, #{city,jdbcType=CHAR}, 
+      #{district,jdbcType=CHAR}, #{emailcode,jdbcType=CHAR}, #{choosetype,jdbcType=INTEGER}, 
+      #{subscribeEmail,jdbcType=INTEGER}, #{abiInvite,jdbcType=INTEGER}, #{abiStudy,jdbcType=INTEGER}, 
+      #{inviteCount,jdbcType=INTEGER}, #{dwellAddress,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}, 
+      #{isFirstLogin,jdbcType=BIT}, #{personId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="zhang.zhe.model.UserInfo" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="nickname != null" >
+        nickname,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="registerDate != null" >
+        register_date,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="headImg != null" >
+        head_img,
+      </if>
+      <if test="hospitalCity != null" >
+        hospital_city,
+      </if>
+      <if test="accessProfile != null" >
+        access_profile,
+      </if>
+      <if test="accessMonitor != null" >
+        access_monitor,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="fixedTel != null" >
+        fixed_tel,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="msn != null" >
+        msn,
+      </if>
+      <if test="mailAddress != null" >
+        mail_address,
+      </if>
+      <if test="mailCode != null" >
+        mail_code,
+      </if>
+      <if test="bloodType != null" >
+        blood_type,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="emailcode != null" >
+        emailCode,
+      </if>
+      <if test="choosetype != null" >
+        chooseType,
+      </if>
+      <if test="subscribeEmail != null" >
+        subscribe_email,
+      </if>
+      <if test="abiInvite != null" >
+        abi_invite,
+      </if>
+      <if test="abiStudy != null" >
+        abi_study,
+      </if>
+      <if test="inviteCount != null" >
+        invite_count,
+      </if>
+      <if test="dwellAddress != null" >
+        dwell_address,
+      </if>
+      <if test="identity != null" >
+        identity,
+      </if>
+      <if test="isFirstLogin != null" >
+        is_first_login,
+      </if>
+      <if test="personId != null" >
+        person_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="registerDate != null" >
+        #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalCity != null" >
+        #{hospitalCity,jdbcType=VARCHAR},
+      </if>
+      <if test="accessProfile != null" >
+        #{accessProfile,jdbcType=INTEGER},
+      </if>
+      <if test="accessMonitor != null" >
+        #{accessMonitor,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedTel != null" >
+        #{fixedTel,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="msn != null" >
+        #{msn,jdbcType=VARCHAR},
+      </if>
+      <if test="mailAddress != null" >
+        #{mailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mailCode != null" >
+        #{mailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=CHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=CHAR},
+      </if>
+      <if test="emailcode != null" >
+        #{emailcode,jdbcType=CHAR},
+      </if>
+      <if test="choosetype != null" >
+        #{choosetype,jdbcType=INTEGER},
+      </if>
+      <if test="subscribeEmail != null" >
+        #{subscribeEmail,jdbcType=INTEGER},
+      </if>
+      <if test="abiInvite != null" >
+        #{abiInvite,jdbcType=INTEGER},
+      </if>
+      <if test="abiStudy != null" >
+        #{abiStudy,jdbcType=INTEGER},
+      </if>
+      <if test="inviteCount != null" >
+        #{inviteCount,jdbcType=INTEGER},
+      </if>
+      <if test="dwellAddress != null" >
+        #{dwellAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="isFirstLogin != null" >
+        #{isFirstLogin,jdbcType=BIT},
+      </if>
+      <if test="personId != null" >
+        #{personId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="zhang.zhe.model.UserInfoExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.nickname != null" >
+        nickname = #{record.nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realname != null" >
+        realname = #{record.realname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=CHAR},
+      </if>
+      <if test="record.registerDate != null" >
+        register_date = #{record.registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headImg != null" >
+        head_img = #{record.headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hospitalCity != null" >
+        hospital_city = #{record.hospitalCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accessProfile != null" >
+        access_profile = #{record.accessProfile,jdbcType=INTEGER},
+      </if>
+      <if test="record.accessMonitor != null" >
+        access_monitor = #{record.accessMonitor,jdbcType=INTEGER},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fixedTel != null" >
+        fixed_tel = #{record.fixedTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phone != null" >
+        phone = #{record.phone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qq != null" >
+        qq = #{record.qq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msn != null" >
+        msn = #{record.msn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailAddress != null" >
+        mail_address = #{record.mailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mailCode != null" >
+        mail_code = #{record.mailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bloodType != null" >
+        blood_type = #{record.bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=CHAR},
+      </if>
+      <if test="record.district != null" >
+        district = #{record.district,jdbcType=CHAR},
+      </if>
+      <if test="record.emailcode != null" >
+        emailCode = #{record.emailcode,jdbcType=CHAR},
+      </if>
+      <if test="record.choosetype != null" >
+        chooseType = #{record.choosetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.subscribeEmail != null" >
+        subscribe_email = #{record.subscribeEmail,jdbcType=INTEGER},
+      </if>
+      <if test="record.abiInvite != null" >
+        abi_invite = #{record.abiInvite,jdbcType=INTEGER},
+      </if>
+      <if test="record.abiStudy != null" >
+        abi_study = #{record.abiStudy,jdbcType=INTEGER},
+      </if>
+      <if test="record.inviteCount != null" >
+        invite_count = #{record.inviteCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.dwellAddress != null" >
+        dwell_address = #{record.dwellAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.identity != null" >
+        identity = #{record.identity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isFirstLogin != null" >
+        is_first_login = #{record.isFirstLogin,jdbcType=BIT},
+      </if>
+      <if test="record.personId != null" >
+        person_id = #{record.personId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=TINYINT},
+      nickname = #{record.nickname,jdbcType=VARCHAR},
+      realname = #{record.realname,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=CHAR},
+      register_date = #{record.registerDate,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=TINYINT},
+      birthday = #{record.birthday,jdbcType=DATE},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      head_img = #{record.headImg,jdbcType=VARCHAR},
+      hospital_city = #{record.hospitalCity,jdbcType=VARCHAR},
+      access_profile = #{record.accessProfile,jdbcType=INTEGER},
+      access_monitor = #{record.accessMonitor,jdbcType=INTEGER},
+      email = #{record.email,jdbcType=VARCHAR},
+      fixed_tel = #{record.fixedTel,jdbcType=VARCHAR},
+      phone = #{record.phone,jdbcType=VARCHAR},
+      qq = #{record.qq,jdbcType=VARCHAR},
+      msn = #{record.msn,jdbcType=VARCHAR},
+      mail_address = #{record.mailAddress,jdbcType=VARCHAR},
+      mail_code = #{record.mailCode,jdbcType=VARCHAR},
+      blood_type = #{record.bloodType,jdbcType=VARCHAR},
+      city = #{record.city,jdbcType=CHAR},
+      district = #{record.district,jdbcType=CHAR},
+      emailCode = #{record.emailcode,jdbcType=CHAR},
+      chooseType = #{record.choosetype,jdbcType=INTEGER},
+      subscribe_email = #{record.subscribeEmail,jdbcType=INTEGER},
+      abi_invite = #{record.abiInvite,jdbcType=INTEGER},
+      abi_study = #{record.abiStudy,jdbcType=INTEGER},
+      invite_count = #{record.inviteCount,jdbcType=INTEGER},
+      dwell_address = #{record.dwellAddress,jdbcType=VARCHAR},
+      identity = #{record.identity,jdbcType=VARCHAR},
+      is_first_login = #{record.isFirstLogin,jdbcType=BIT},
+      person_id = #{record.personId,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="zhang.zhe.model.UserInfo" >
+    update user
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="nickname != null" >
+        nickname = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="registerDate != null" >
+        register_date = #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null" >
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="hospitalCity != null" >
+        hospital_city = #{hospitalCity,jdbcType=VARCHAR},
+      </if>
+      <if test="accessProfile != null" >
+        access_profile = #{accessProfile,jdbcType=INTEGER},
+      </if>
+      <if test="accessMonitor != null" >
+        access_monitor = #{accessMonitor,jdbcType=INTEGER},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="fixedTel != null" >
+        fixed_tel = #{fixedTel,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="msn != null" >
+        msn = #{msn,jdbcType=VARCHAR},
+      </if>
+      <if test="mailAddress != null" >
+        mail_address = #{mailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="mailCode != null" >
+        mail_code = #{mailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="bloodType != null" >
+        blood_type = #{bloodType,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=CHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=CHAR},
+      </if>
+      <if test="emailcode != null" >
+        emailCode = #{emailcode,jdbcType=CHAR},
+      </if>
+      <if test="choosetype != null" >
+        chooseType = #{choosetype,jdbcType=INTEGER},
+      </if>
+      <if test="subscribeEmail != null" >
+        subscribe_email = #{subscribeEmail,jdbcType=INTEGER},
+      </if>
+      <if test="abiInvite != null" >
+        abi_invite = #{abiInvite,jdbcType=INTEGER},
+      </if>
+      <if test="abiStudy != null" >
+        abi_study = #{abiStudy,jdbcType=INTEGER},
+      </if>
+      <if test="inviteCount != null" >
+        invite_count = #{inviteCount,jdbcType=INTEGER},
+      </if>
+      <if test="dwellAddress != null" >
+        dwell_address = #{dwellAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="identity != null" >
+        identity = #{identity,jdbcType=VARCHAR},
+      </if>
+      <if test="isFirstLogin != null" >
+        is_first_login = #{isFirstLogin,jdbcType=BIT},
+      </if>
+      <if test="personId != null" >
+        person_id = #{personId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="zhang.zhe.model.UserInfo" >
+    update user
+    set type = #{type,jdbcType=TINYINT},
+      nickname = #{nickname,jdbcType=VARCHAR},
+      realname = #{realname,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      register_date = #{registerDate,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=TINYINT},
+      birthday = #{birthday,jdbcType=DATE},
+      gender = #{gender,jdbcType=VARCHAR},
+      head_img = #{headImg,jdbcType=VARCHAR},
+      hospital_city = #{hospitalCity,jdbcType=VARCHAR},
+      access_profile = #{accessProfile,jdbcType=INTEGER},
+      access_monitor = #{accessMonitor,jdbcType=INTEGER},
+      email = #{email,jdbcType=VARCHAR},
+      fixed_tel = #{fixedTel,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      msn = #{msn,jdbcType=VARCHAR},
+      mail_address = #{mailAddress,jdbcType=VARCHAR},
+      mail_code = #{mailCode,jdbcType=VARCHAR},
+      blood_type = #{bloodType,jdbcType=VARCHAR},
+      city = #{city,jdbcType=CHAR},
+      district = #{district,jdbcType=CHAR},
+      emailCode = #{emailcode,jdbcType=CHAR},
+      chooseType = #{choosetype,jdbcType=INTEGER},
+      subscribe_email = #{subscribeEmail,jdbcType=INTEGER},
+      abi_invite = #{abiInvite,jdbcType=INTEGER},
+      abi_study = #{abiStudy,jdbcType=INTEGER},
+      invite_count = #{inviteCount,jdbcType=INTEGER},
+      dwell_address = #{dwellAddress,jdbcType=VARCHAR},
+      identity = #{identity,jdbcType=VARCHAR},
+      is_first_login = #{isFirstLogin,jdbcType=BIT},
+      person_id = #{personId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
